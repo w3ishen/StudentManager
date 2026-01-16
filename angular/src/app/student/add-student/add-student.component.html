@@ -1,0 +1,56 @@
+<div style="width: 100%; margin: 0 auto;">
+  <h1 class="text-center mb-4" style="width: 100%; font-weight: 700;">Add Student</h1>
+</div>
+
+<div class="container d-flex justify-content-center align-items-center">
+  <div class="card shadow-sm" style="width: 100%; border-radius: 14px;">
+    <div class="" style="padding: 28px;">
+      <form [formGroup]="form" (ngSubmit)="submit()">
+
+          <!-- ID (auto-increment) -->
+          <div class="mb-3">
+            <label class="form-label">Student ID</label>
+            <input class="form-control" value="(Auto)" disabled />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input class="form-control" formControlName="name" placeholder="Enter name" />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input class="form-control" formControlName="email" placeholder="Enter Email" />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Course</label>
+            <input class="form-control" formControlName="course" placeholder="Enter Course" />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Study Mode</label>
+            <select class="form-select" formControlName="studyMode">
+              <option [ngValue]="null" disabled>Select study mode</option>
+              <option *ngFor="let m of studyModes" [ngValue]="m.value">
+                {{ m.label }}
+              </option>
+            </select>
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label">Country of Origin</label>
+            <select class="form-select" formControlName="countryOfOrigin">
+              <option value="" disabled>Select country</option>
+              <option *ngFor="let c of countries" [value]="c">{{ c }}</option>
+            </select>
+          </div>
+
+          <button class="btn btn-primary w-100" type="submit" [disabled]="isSubmitting">
+            {{ isSubmitting ? 'Adding...' : 'Add' }}
+          </button>
+
+      </form>
+    </div>
+  </div>
+</div>
