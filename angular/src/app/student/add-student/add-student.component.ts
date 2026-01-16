@@ -4,11 +4,12 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToasterService } from '@abp/ng.theme.shared';
 import { StudentApiService } from '../student-api.service';
 import { StudyMode } from '../student.models';
+import { BookComponent } from 'src/app/books/book.component';
 
 @Component({
   selector: 'app-add-student',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, BookComponent],
   templateUrl: './add-student.component.html',
   styleUrl: './add-student.component.scss',
 })
