@@ -1,0 +1,14 @@
+.title {
+	font-weight: 700;
+	width: 100%;
+}
+
+.card {
+	width: 100%;
+	max-width: 800px; // width of add student form
+	border-radius: 14px;
+}
+
+:host ::ng-deep .card-body {
+	padding: 28px;
+}
