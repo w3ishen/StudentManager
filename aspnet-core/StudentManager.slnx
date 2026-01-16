@@ -1,0 +1,35 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/StudentManager.Application.Contracts/StudentManager.Application.Contracts.csproj" />
+    <Project Path="src/StudentManager.Application/StudentManager.Application.csproj" />
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <Project Path="src/StudentManager.DbMigrator/StudentManager.DbMigrator.csproj" />
+    <Project Path="src/StudentManager.Domain.Shared/StudentManager.Domain.Shared.csproj" />
+    <Project Path="src/StudentManager.Domain/StudentManager.Domain.csproj" />
+    <Project Path="src/StudentManager.EntityFrameworkCore/StudentManager.EntityFrameworkCore.csproj" />
+    <Project Path="src/StudentManager.HttpApi.Client/StudentManager.HttpApi.Client.csproj" />
+    
+    <Project Path="src/StudentManager.HttpApi.Host/StudentManager.HttpApi.Host.csproj" />
+    <Project Path="src/StudentManager.HttpApi/StudentManager.HttpApi.csproj" />
+    
+    
+    
+  </Folder>
+  <Folder Name="/test/">
+    <Project Path="test/StudentManager.Application.Tests/StudentManager.Application.Tests.csproj" />
+    <Project Path="test/StudentManager.Domain.Tests/StudentManager.Domain.Tests.csproj" />
+    <Project Path="test/StudentManager.EntityFrameworkCore.Tests/StudentManager.EntityFrameworkCore.Tests.csproj" />
+    <Project Path="test/StudentManager.HttpApi.Client.ConsoleTestApp/StudentManager.HttpApi.Client.ConsoleTestApp.csproj" />
+    
+    <Project Path="test/StudentManager.TestBase/StudentManager.TestBase.csproj" />
+    
+  </Folder>
+</Solution>
