@@ -14,6 +14,7 @@ using Volo.Abp.TenantManagement;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
 
 using StudentManager.Students;
+using StudentManager.Books;
 
 namespace StudentManager.EntityFrameworkCore;
 
@@ -27,6 +28,7 @@ public class StudentManagerDbContext :
 {
     /* Add DbSet properties for your Aggregate Roots / Entities here. */
     public DbSet<Student> Students { get; set; } //Add DbSet
+    public DbSet<Book> Books { get; set; } //Add DbSet
 
     #region Entities from the modules
 
@@ -80,15 +82,24 @@ public class StudentManagerDbContext :
         /* Configure your own tables/entities inside here */
 
         builder.Entity<Student>(b =>
-{
-    b.ToTable("Students");
+        {
+            b.ToTable("Students");
 
-    b.Property(x => x.Name).IsRequired().HasMaxLength(128);
-    b.Property(x => x.Email).IsRequired().HasMaxLength(256);
-    b.Property(x => x.Course).IsRequired().HasMaxLength(128);
-    b.Property(x => x.CountryOfOrigin).IsRequired().HasMaxLength(128);
+            b.Property(x => x.Name).IsRequired().HasMaxLength(128);
+            b.Property(x => x.Email).IsRequired().HasMaxLength(256);
+            b.Property(x => x.Course).IsRequired().HasMaxLength(128);
+            b.Property(x => x.CountryOfOrigin).IsRequired().HasMaxLength(128);
 
-    b.HasIndex(x => x.Email).IsUnique();
-});
+            b.HasIndex(x => x.Email).IsUnique();
+        });
+
+        builder.Entity<Book>(b =>
+        {
+            b.ToTable("Books");
+
+            b.Property(x => x.Title).IsRequired().HasMaxLength(128);
+            b.Property(x => x.Author).IsRequired().HasMaxLength(256);
+        });
+
     }
 }
