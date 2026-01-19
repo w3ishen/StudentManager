@@ -1,0 +1,140 @@
+<h1 class="title text-center mb-4">Book Manager</h1>
+
+<div class="d-flex justify-content-end mb-3">
+  <button type="button" class="add-btn" (click)="openAdd()">
+  <i class="bi bi-plus add-icon"></i>
+</button>
+</div>
+
+<div class="card shadow-sm">
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered align-middle mb-0">
+        <thead class="table-light">
+          <tr>
+            <th style="width: 110px;">Book ID</th>
+            <th style="min-width: 160px;">Title</th>
+            <th style="min-width: 220px;">Author</th>
+            <th class="text-center" style="width: 180px;">Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngIf="isLoading">
+            <td colspan="4" class="text-center py-4">Loading...</td>
+          </tr>
+
+          <tr *ngIf="!isLoading && books.length === 0">
+            <td colspan="4" class="text-center py-4 text-muted">No books found.</td>
+          </tr>
+
+          <tr *ngFor="let b of books">
+            <td>{{ b.id }}</td>
+            <td class="fw-semibold">{{ b.title }}</td>
+            <td>{{ b.author }}</td>
+            <td class="text-center">
+              <div class="d-flex justify-content-center gap-2">
+                <button class="btn btn-primary btn-sm" type="button" (click)="openEdit(b)">Edit</button>
+
+                <button
+                  class="btn btn-danger btn-sm"
+                  type="button"
+                  (click)="confirmDelete(b)"
+                  [disabled]="isDeletingId === b.id"
+                >
+                  {{ isDeletingId === b.id ? 'Deleting...' : 'Delete' }}
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="entries text-center mt-3">
+      {{ entriesText }}
+    </div>
+  </div>
+</div>
+
+<!--Edit modal (popup)-->
+<div class="modal-backdrop" *ngIf="isEditOpen" (click)="closeEdit()"></div>
+
+<div class="modal" *ngIf="isEditOpen" role="dialog" aria-modal="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <h5 class="modal-title">Edit Book</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="closeEdit()"></button>
+      </div>
+
+      <form [formGroup]="editForm" (ngSubmit)="saveEdit()">
+        <div class="modal-body">
+          <div class="mb-3">
+            <label class="form-label">Book ID</label>
+            <input class="form-control" [value]="editingBook?.id" disabled />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Title</label>
+            <input class="form-control" formControlName="title" placeholder="Enter title" />
+          </div>
+
+          <div class="mb-0">
+            <label class="form-label">Author</label>
+            <input class="form-control" formControlName="author" placeholder="Enter author" />
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" (click)="closeEdit()" [disabled]="isSaving">
+            Cancel
+          </button>
+          <button type="submit" class="btn btn-primary" [disabled]="editForm.invalid || isSaving">
+            {{ isSaving ? 'Editing...' : 'Edit' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<!--Add modal-->
+<div class="modal-backdrop" *ngIf="isAddOpen" (click)="closeAdd()"></div>
+
+<div class="modal" *ngIf="isAddOpen" role="dialog" aria-modal="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <h5 class="modal-title">Add Book</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="closeAdd()"></button>
+      </div>
+
+      <form [formGroup]="addForm" (ngSubmit)="saveAdd()">
+        <div class="modal-body">
+          <div class="mb-3">
+            <label class="form-label">Title</label>
+            <input class="form-control" formControlName="title" placeholder="Enter title" />
+          </div>
+
+          <div class="mb-0">
+            <label class="form-label">Author</label>
+            <input class="form-control" formControlName="author" placeholder="Enter author" />
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" (click)="closeAdd()" [disabled]="isSaving">
+            Cancel
+          </button>
+          <button type="submit" class="btn btn-primary" [disabled]="addForm.invalid || isSaving">
+            {{ isSaving ? 'Adding...' : 'Add' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
