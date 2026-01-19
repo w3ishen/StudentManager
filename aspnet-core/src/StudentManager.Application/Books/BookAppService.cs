@@ -1,39 +1,51 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
 
-namespace StudentManager.Books
+namespace StudentManager.Books;
+// BookAppService is inheriting from ABP built-in CRUD service
+// ABP automatically generate the API endpoints
+public class BookAppService
+    : CrudAppService<Book, BookDto, int, PagedAndSortedResultRequestDto, CreateUpdateBookDto>
 {
-    public class BookAppService : ApplicationService
+    // Tells the ABP to give me the repository that manages the Book entities
+    public BookAppService(IRepository<Book, int> repository)
+        : base(repository)
     {
-        private IRepository<Book, int> _bookRepository;
-        public BookAppService(IRepository<Book, int> bookRepository)
-        {
-            _bookRepository = bookRepository;
-        }
-        public async Task<GetAllBookOutput> GetAllBookAsync(GetAllBookInput input)
-        {
-            var books = await _bookRepository.GetListAsync();
-            var bookDtos = new List<BookDto>();
+    }
 
-            foreach (var book in books)
-            {
-                var b = new BookDto
-                {
-                    Title = book.Title,
-                    Author = book.Author
-                };
-                bookDtos.Add(b);
-            }
+    protected override Book MapToEntity(CreateUpdateBookDto input)
+    {
+        return new Book
+        {
+            Title = input.Title,
+            Author = input.Author
+        };
+    }
 
-            return new GetAllBookOutput()
-            {
-                Books = bookDtos
-            };
-        }
+    protected override void MapToEntity(CreateUpdateBookDto input, Book entity)
+    {
+        entity.Title = input.Title;
+        entity.Author = input.Author;
+    }
+
+    protected override BookDto MapToGetOutputDto(Book entity)
+    {
+        return new BookDto
+        {
+            Id = entity.Id,
+            Title = entity.Title,
+            Author = entity.Author
+        };
+    }
+
+    protected override BookDto MapToGetListOutputDto(Book entity)
+    {
+        return new BookDto
+        {
+            Id = entity.Id,
+            Title = entity.Title,
+            Author = entity.Author
+        };
     }
 }
