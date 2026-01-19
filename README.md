@@ -5,13 +5,13 @@ This project aims to understand the standard operating procedure (SOP) of develo
 - Activities include:
     - **Add Entity**
         - Create Entity
-        - Register entity in DbContext
+        - Register entity in `DbContext`
     - **DB Migrations**
-        - Create migration (run in EntityFrameworkCore project)
-        - Apply migration using DbMigrator
-    - **Add item list API**
+        - Create migration (run in `EntityFrameworkCore` project)
+        - Apply migration using `DbMigrator`
+    - **Create CRUD APIs**
         - Verify endpoints via Swagger (https://localhost:44334/swagger)
-        - Implement AppService using CrudAppService
+        - Implement AppService using `CrudAppService`
         - Create DTOs (Output DTO, Input DTO)
     - **Angular Integration**
         - Create Angular component + RestService
@@ -80,8 +80,8 @@ This project aims to understand the standard operating procedure (SOP) of develo
    npm start
    ```
    - Open:
-   http://localhost:4200
+    http://localhost:4200
    - To navigate to student manager, open:
-   http://localhost:4200/students/add
+    http://localhost:4200/students/add
    - To navigate to book manager, open:
-   http://localhost:4200/books/manage
+    http://localhost:4200/books/manage
