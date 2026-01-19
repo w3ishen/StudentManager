@@ -56,12 +56,16 @@ export class BookComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.load();
   }
-  // Cleanup
+  // The use ngOnDestroy:
+  // -Cancelled all pending requests
+  // -Component cleans itself up
+  // -Professional-grade lifecycle handling
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
   }
 
+  // Eg.: "Showing 1 to 3 of 3 entries"
   get entriesText(): string {
     const total = this.totalCount || this.books.length; // If totalCount exists (from API paging), use it
     if (this.isLoading) return 'Loading...';
@@ -71,6 +75,15 @@ export class BookComponent implements OnInit, OnDestroy {
 
   load(): void {
   this.isLoading = true;
+
+  // Every time you do:
+  // this.rest.request(...).subscribe(...)
+  // Angular opens a subscription.
+  // If you navigate away from the page and the component is destroyed, 
+  // that subscription may still be alive unless you explicitly stop it.
+
+  // Using takeUntil(this.destroy$) + ngOnDestroy() unsubscribes all active
+  // subscriptions for this component, preventing "ghost" callbacks.
 
   // Read method (GET)
   this.rest
