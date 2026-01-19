@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Volo.Abp.Application.Dtos;
 
-namespace StudentManager.Books
+namespace StudentManager.Books;
+
+public class BookDto : EntityDto<int>
 {
-    public class BookDto
-    {
-        public string Title { get; set; }
-        public string Author { get; set; }
-
-    }
+    public string Title { get; set; } = string.Empty;
+    public string Author { get; set; } = string.Empty;
 }
