@@ -27,9 +27,20 @@ export const appRoutes: Routes = [
             m => m.ManageStudentsComponent
           ),
       },
+      // Book manager shares sidebar/layout
+    { path: 'books/manage', 
+      loadComponent: () => import('./books/book.component').then(
+        m => m.BookComponent
+      ) 
+    },
+
+    
       { path: '', pathMatch: 'full', redirectTo: 'manage' },
     ],
   },
+  
+
+  // ABP built-in modules
   {
     path: 'account',
     loadChildren: () => import('@abp/ng.account').then(m => m.createRoutes()),
