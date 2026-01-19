@@ -20,8 +20,13 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
           <a routerLink="/students/manage" routerLinkActive="active" class="nav-link btn btn-outline-primary">
             Student Manager
           </a>
-        </nav>
-      </aside>
+        <!--Book Manager link-->
+      <a routerLink="/students/books/manage" routerLinkActive="active" class="nav-link btn btn-outline-primary">
+        Book Manager
+      </a>
+      
+    </nav>
+  </aside>
 
       <main class="student-main">
         <div class="student-content">
